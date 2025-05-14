@@ -1,18 +1,18 @@
 {
-    "id": "transparent-newtab",
-    "name": "Transparent New Tab",
-    "description": "A mod for having a transparent new tab if Transparent Zen is enabled.",
-    "homepage": "https://github.com/CosmoCreeper/TransparentNewTab",
-    "style": "https://raw.githubusercontent.com/CosmoCreeper/TransparentNewTab/main/chrome.css",
-    "readme": "https://raw.githubusercontent.com/CosmoCreeper/TransparentNewTab/main/readme.md",
-    "image": "https://raw.githubusercontent.com/CosmoCreeper/TransparentNewTab/main/transparentnewtab.png",
-    "author": "CosmoCreeper",
-    "version": "1.0.2",
+    "id": "arc-tab-groups",
+    "name": "Tab Groups for Arc H",
+    "description": "A mod for having Arc style tab groups.",
+    "homepage": "https://github.com/ferrocyante/Tab-groups-for-Arc-H/",
+    "style": "https://raw.githubusercontent.com/ferrocyante/Tab-groups-for-Arc-H/main/chrome.css",
+    "readme": "https://raw.githubusercontent.com/ferrocyante/Tab-groups-for-Arc-H/main/README.md",
+    "image": "https://raw.githubusercontent.com/ferrocyante/Tab-groups-for-Arc-H/main/image.png",
+    "author": "ferrocyante",
+    "version": "1.0.0",
     "tags": [
         "sine",
-        "newtab",
-        "transparent"
+        "tabgroups",
+        "arc"
     ],
-    "createdAt": "2025-05-01",
-    "updatedAt": "2025-05-13"
+    "createdAt": "2025-05-14",
+    "updatedAt": "2025-05-14"
 }
