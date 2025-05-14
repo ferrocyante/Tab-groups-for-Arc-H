@@ -1,3 +1,4 @@
+
 /* ==== Tab groups ==== */
 /*------------ >_< HELLO ---------------*/
 
@@ -82,7 +83,7 @@ tab-group[style="--tab-group-color: var(--tab-group-color-yellow); --tab-group-c
   /* GROUP Animation Timing (SLOW - for visual effect) */
   --group-visual-duration: 0.3s; /* How long the group takes to open visually */
   --group-visual-collapse-duration: 0.15s; /* How long the group takes to close visually */
-  --group-expand-easing: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --group-expand-easing: cubic-bezier(0.22, 0.61, 0.36, 0.5);
   /* Adjusted extreme bezier - use a standard fast ease-in for collapse */
   --group-collapse-easing:  cubic-bezier(0.055, 0.006, 0.0068, 0.019); /* Example: EaseInQuad */
 
@@ -138,7 +139,7 @@ tab-group:not([split-view-group]) {
     &:after { display: none !important; }
     &>label {
        width: 100% !important; max-width: 100% !important; padding-top: 8.15px !important;
-       margin-left: 14px !important; padding-bottom: 0px !important; 
+       margin-left: 8px !important; padding-bottom: 0px !important; 
        padding-inline: 0em !important; background: transparent !important; border: unset !important;
        font-weight: 500 !important; 
       
@@ -161,7 +162,7 @@ tab-group:not([split-view-group]) {
 
   /* --- Tabs within Group --- */
   & tab:not([zen-glance-tab]) {
-    margin-left: 18px !important; overflow: hidden !important; position: relative;
+    margin-left: 14px !important; overflow: hidden !important; position: relative;
 
     /* --- Tab Transition (Uses FAST motion timing) --- */
     transition:
