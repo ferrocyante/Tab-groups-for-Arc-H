@@ -75,24 +75,22 @@ tab-group[style="--tab-group-color: var(--tab-group-color-yellow); --tab-group-c
 
 
 
-
-
 /* Combined CSS - Decoupled Tab Motion from Group Animation */
 
 /* --- Global Animation Variables --- */
 :root {
   /* GROUP Animation Timing (SLOW - for visual effect) */
-  --group-visual-duration: 3s; /* How long the group takes to open visually */
-  --group-visual-collapse-duration: 0.1s; /* How long the group takes to close visually */
+  --group-visual-duration: 0.3s; /* How long the group takes to open visually */
+  --group-visual-collapse-duration: 0.15s; /* How long the group takes to close visually */
   --group-expand-easing: cubic-bezier(0.22, 0.61, 0.36, 1);
   /* Adjusted extreme bezier - use a standard fast ease-in for collapse */
-  --group-collapse-easing:  cubic-bezier(0.055, 0.006, 0.0068, 0.0019); /* Example: EaseInQuad */
+  --group-collapse-easing:  cubic-bezier(0.055, 0.006, 0.0068, 0.019); /* Example: EaseInQuad */
 
   /* TAB Motion Timing (FAST - for responsiveness & drag/drop) */
-  --tab-motion-duration: 0.25s; /* <<<< FAST duration for tab transform/opacity */
+  --tab-motion-duration: 0.28s; /* <<<< FAST duration for tab transform/opacity */
   --tab-motion-easing: ease; /* Standard easing for tab motion */
-  --tab-translate-distance: 45px; /* How far tabs slide up */
-  --tab-opacity-duration: calc(var(--tab-motion-duration) * 0.9); /* Opacity fades quickly too */
+  --tab-translate-distance: 5px; /* How far tabs slide up */
+  --tab-opacity-duration: 5s; /* Opacity fades quickly too */
 
   /* ICON Transition Timing (User Defined - currently instant) */
   --icon-transition-duration: 0s;
@@ -132,23 +130,27 @@ tab-group:not([split-view-group]) {
     flex: 0 0 auto !important; position: sticky !important; top: 0 !important; z-index: 1000 !important;
     padding: 0px !important; --tab-group-color-pale: transparent !important; --tab-group-color: transparent !important;
     margin: 0 !important; height: var(--group-max-height-closed) !important;
+   
     margin-bottom: 2px !important; border-radius: calc(var(--border-radius-medium) + 2px) !important;
     transition: background-color 0.2s ease !important;
+    transform: translateY(0px) !important;
     &:hover { background-color: var(--tab-hover-background-color) !important; }
     &:after { display: none !important; }
     &>label {
        width: 100% !important; max-width: 100% !important; padding-top: 6px !important;
        margin-left: 12px !important; padding-bottom: 0px !important; 
        padding-inline: 0em !important; background: transparent !important; border: unset !important;
-       font-weight: 500 !important; font-size: 15px !important; text-align: unset !important;
+       font-weight: 500 !important; 
+      
+       font-size: 16px !important; text-align: unset !important;
        color: var(--sidebar-text-color) !important; padding-left: 27px !important;
        @media not (-moz-bool-pref: "zen.view.sidebar-expanded") { color: transparent !important; }
      }
      &>label::before { /* Icon Base Styling */
        content: var(--folder-icon-open) !important;
      
-       position: absolute !important; margin-left: 0px !important; left: 3px !important;
-       scale: 1.3!important; margin-top: 1.2px !important; top: 1% !important;
+       position: absolute !important; margin-left: 0px !important; left: 3.5px !important;
+       scale: 1.3 !important; margin-top: 1.2px !important; top: 1% !important;
        transition: /* Icon uses its own timing */
          scale var(--icon-transition-duration) var(--icon-transition-easing),
          margin-top var(--icon-transition-duration) var(--icon-transition-easing);
@@ -159,7 +161,7 @@ tab-group:not([split-view-group]) {
 
   /* --- Tabs within Group --- */
   & tab:not([zen-glance-tab]) {
-    margin-left: 18px !important; overflow: visible !important; position: relative;
+    margin-left: 18px !important; overflow: hidden !important; position: relative;
 
     /* --- Tab Transition (Uses FAST motion timing) --- */
     transition:
@@ -198,6 +200,7 @@ tab-group:not([split-view-group]) {
     /* Animate container closed (Uses SLOW visual timing) */
     max-height: var(--group-max-height-closed) !important;
     margin-bottom: 2px !important;
+    
     transition:
       /* Apply SLOW durations to the container's height/margin */
       max-height var(--group-visual-collapse-duration) var(--group-collapse-easing),
@@ -207,8 +210,9 @@ tab-group:not([split-view-group]) {
     & .tab-group-label-container > label::before {
       content: var(--folder-icon-closed) !important;
       scale: 1 !important;
-      margin-top: 2.2px !important;
-      margin-left: -1px !important;
+       
+      margin-top: 1.8px !important;
+      margin-left: -2px !important;
     }
 
     /* --- Collapsed Tab Styling --- */
@@ -240,3 +244,91 @@ tab-group:not([split-view-group]) {
 #navigator-toolbox:not([movingtab]) tab-group:not([split-view-group]) tab[style=""] {
    transition: none !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*---------------------------------------------------------------------------------------------*/
+
+/* Tab Group General Styles */
+tab-group:not([split-view-group]) {
+    display: flex !important;
+    flex-direction: column !important;
+    transition: max-height 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden !important;
+   
+  
+    &[collapsed]{
+        & .tab-group-label-container>label::before {
+            animation: folderAnimation-close 1s ease-in-out forwards !important;
+            animation-fill-mode: forwards !important;
+        }
+    }
+    &:not([collapsed]){
+        & .tab-group-label-container>label::before {
+           
+            animation: folderAnimation-open 1s ease-in-out forwards !important;
+            animation-fill-mode: forwards !important;
+        }
+    
+    }
+}
+
+/* Collapsed and Expanded States for Tab Group Label */
+.tab-group-label-container {
+    flex: 0 0 auto !important;
+    position: sticky !important;
+    z-index: 9999 !important;
+    
+    
+    transition: transform 0.2s ease, background 0.6s ease, border-radius 0.2s ease-in-out;
+}
+
+
+
+/* Tab Behavior */
+tab:not([zen-glance-tab]) {
+    overflow: visible !important;
+}
+
+
+
+tab-group:not([split-view-group])[collapsed] tab {
+    transition: opacity 1.0s ease !important;
+    z-index: -1 !important;
+    display: flex !important;
+    opacity: 1 !important;
+}
+
+/* Expandable Groups */
+tab-group:not([split-view-group]):not([collapsed]) {
+    transition: max-height 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+   
+    max-height: 180px !important;
+    overflow: scroll !important;
+    scrollbar-width: none !important;
+}
+
+
+
+
+
+
+tab-group:not([split-view-group]) {
+    .tabbrowser-tab::before {
+        display: none !important;
+    }
+}
+
