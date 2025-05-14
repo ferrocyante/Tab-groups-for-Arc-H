@@ -142,7 +142,7 @@ tab-group:not([split-view-group]) {
        padding-inline: 0em !important; background: transparent !important; border: unset !important;
        font-weight: 500 !important; 
       
-       font-size: 16px !important; text-align: unset !important;
+       font-size: 14.5px !important; text-align: unset !important;
        color: var(--sidebar-text-color) !important; padding-left: 27px !important;
        @media not (-moz-bool-pref: "zen.view.sidebar-expanded") { color: transparent !important; }
      }
